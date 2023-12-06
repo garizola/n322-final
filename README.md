@@ -9,4 +9,3 @@ _Delete button does not work on lists and list items & warning about async persi
 - You must have a fully styled app that uses authentication.
 - You have to have at least two screens
 - Make sure you can log in and use the authentication from Firebase
-# n322-final
