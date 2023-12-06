@@ -37,7 +37,7 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <View style={commonStyles.container}>
-      <Text style={commonStyles.header}>Login Screen</Text>
+      <Text style={commonStyles.header}>Login</Text>
 
       <TextInput
         style={commonStyles.inputs}

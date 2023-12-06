@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, FlatList } from "react-native";
-import { Button, TextInput, List, TouchableOpacity } from "react-native-paper";
+import {
+  Button,
+  TextInput,
+  List,
+  TouchableOpacity,
+  Icon,
+  IconButton,
+} from "react-native-paper";
 import { commonStyles } from "../styles";
 import {
   getFirestore,
   collection,
   getDocs,
+  doc,
   addDoc,
   deleteDoc,
 } from "firebase/firestore";
@@ -62,16 +70,13 @@ export default function ListsScreen({ navigation }) {
 
   const deleteList = async (listId) => {
     try {
-      const userListsCollection = collection(
+      const listDocRef = doc(
         firestore,
-        "users",
-        auth.currentUser.uid,
-        "lists"
+        `users/${auth.currentUser.uid}/lists/${listId}`
       );
-      const listDoc = collection(userListsCollection, listId);
-      await deleteDoc(listDoc);
-      console.log("Deleting list with ID:", listId);
+      await deleteDoc(listDocRef);
 
+      // Refresh the lists
       fetchLists();
     } catch (error) {
       console.error("Error deleting list:", error.message);
@@ -108,9 +113,10 @@ export default function ListsScreen({ navigation }) {
               navigation.navigate("ListDetail", { listId: item.id });
             }}
             right={(props) => (
-              <List.Icon
+              <IconButton
                 {...props}
                 icon="delete"
+                color="red"
                 onPress={() => deleteList(item.id)}
               />
             )}

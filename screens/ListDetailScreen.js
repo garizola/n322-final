@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, FlatList } from "react-native";
-import { Button, TextInput, List, Snackbar } from "react-native-paper";
+import {
+  Button,
+  TextInput,
+  List,
+  Snackbar,
+  IconButton,
+} from "react-native-paper";
 import { commonStyles } from "../styles";
 import {
   getFirestore,
@@ -114,7 +120,7 @@ export default function ListDetailScreen({ route }) {
           <List.Item
             title={item.name}
             right={(props) => (
-              <List.Icon
+              <IconButton
                 {...props}
                 icon="delete"
                 onPress={() => deleteItem(item.id)}
